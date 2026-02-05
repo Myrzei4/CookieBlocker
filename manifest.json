@@ -1,10 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Cookie Blocker",
-  "version": "1.4",
+  "version": "1.5",
   "permissions": [
     "declarativeNetRequestWithHostAccess",
-    "storage"
+    "declarativeNetRequest",
+    "storage",
+    "tabs"
   ],
   "host_permissions": [
     "<all_urls>"
@@ -16,7 +18,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "run_at": "document_start",
+      "run_at": "document_idle",
       "all_frames": true
     }
   ],
@@ -26,7 +28,7 @@
   "declarative_net_request": {
     "rule_resources": [
       {
-        "id": "blockSetCookie",
+        "id": "ruleset_1",
         "enabled": false,
         "path": "rules.json"
       }
