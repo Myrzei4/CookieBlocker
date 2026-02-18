@@ -27,7 +27,7 @@ async function refreshRules() {
       },
       condition: {
         urlFilter: "|",
-        domainType: ["thirdParty"],
+        domainType: "thirdParty",
         excludedInitiatorDomains: whitelist,
         resourceTypes: ["main_frame", "sub_frame", "script", "xmlhttprequest"]
       }
