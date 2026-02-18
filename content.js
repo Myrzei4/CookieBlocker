@@ -22,6 +22,8 @@ const selectors = [
     '#usercentrics-root', '.usercentrics-overlay', // Usercentrics
     '#CybotCookiebotDialog','.CybotCookiebotDialog',
     "#AcceptCookies", "#CookieConsent", ".cookie-consent-banner", // Generic
+    ".banner", "#banner", ".cookie-banner", "#cookie-banner", // Generic
+    ".consent-banner", "#consent-banner", ".cookie-consent", "#cookie-consent", // Generic
 ];
 
 // Additional selectors can be added as needed
