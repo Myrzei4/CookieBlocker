@@ -10,28 +10,46 @@ async function refreshRules() {
 
   // First, remove existing rule
   await chrome.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds: [RULE_ID],
+    removeRuleIds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28] // Remove any existing rules with these IDs,
   });
 
   // If enabled, add the rule back with updated conditions
   if (isEnabled) {
-    await chrome.declarativeNetRequest.updateDynamicRules({
-      addRules: [{
-        id: RULE_ID,
-        priority: 1,
-        action: { 
-          type: "modifyHeaders",
-          requestHeaders: [{header: "cookie", operation: "remove"}],
-          responseHeaders: [{header: "set-cookie", operation: "remove"}]
-        },
-        condition: {
-          urlFilter: "|",
-          domainType: "thirdParty",
-          excludedInitiatorDomains: whitelist,
-          resourceTypes: ["main_frame", "sub_frame", "script", "xmlhttprequest"]
+    const rules = [];
+    // Block all third-party cookies by default
+    rules.push({
+      id: 1,
+      priority: 1,
+      action: {
+        type: "modifyHeaders",
+        requestHeaders: [{header: "cookie", operation: "remove"}],
+        responseHeaders: [{header: "set-cookie", operation: "remove"}]
+      },
+      condition: {
+        urlFilter: "|",
+        domainType: ["thirdParty"],
+        excludedInitiatorDomains: whitelist,
+        resourceTypes: ["main_frame", "sub_frame", "script", "xmlhttprequest"]
       }
-    }]
-  });
+    });
+
+    const authKeywords = ["auth", "login", "account", "accounts", "aauth", "sso", "oauth", "signin", "session", "token", "secure"];
+
+    authKeywords.forEach((keyword, index) => {
+      rules.push({
+        id: 2 + index,
+        priority: 2,
+        action: { type: "allow" },
+        condition: {
+          urlFilter: `*${keyword}`,
+          resourceTypes: ["main_frame", "sub_frame", "script", "xmlhttprequest"]
+        }
+      });
+    });
+
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      addRules: rules
+    });
   }
 }
 
@@ -50,6 +68,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     });
     return true; // Indicates that we will send a response asynchronously
   }
+
   // Handle enable/disable and rule updates
   if (message.action === "enableBlocking") {
     chrome.storage.local.set({ isEnabled: true }, refreshRules);

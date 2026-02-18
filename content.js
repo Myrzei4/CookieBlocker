@@ -20,6 +20,8 @@ const selectors = [
     '#onetrust-consent-sdk', '.onetrust-banner-sdk', // OneTrust
     '.qc-cmp2-container', // Quantcast
     '#usercentrics-root', '.usercentrics-overlay', // Usercentrics
+    '#CybotCookiebotDialog','.CybotCookiebotDialog',
+    "#AcceptCookies", "#CookieConsent", ".cookie-consent-banner", // Generic
 ];
 
 // Additional selectors can be added as needed

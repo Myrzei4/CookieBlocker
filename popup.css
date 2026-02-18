@@ -1,0 +1,97 @@
+/* Basic styling for the popup */
+body {
+  width: 280px;
+  padding: 15px;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #202124;
+  color: #e8eaed;
+}
+
+.card {
+  background: #292a2d;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  min-height: 200px;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 0 0 15px 0;
+  text-align: center;
+  color: #8ab4f8;
+}
+
+/* Tab navigation */
+.view { display: none; }
+.view.active { display: block; animation: fadeIn 0.2s ease-in-out; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* On/Off switch */
+.switch-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #3c4043;
+  font-weight: 500;
+  font-size: 15px;
+}
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #5f6368; transition: .4s; border-radius: 34px; }
+.slider::before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: #e8eaed; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: #8ab4f8; }
+input:checked + .slider::before { transform: translateX(20px); }
+
+/* Buttons */
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #8ab4f8;
+  color: #202124;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+.btn:hover { background-color: #76a7fa; }
+
+/* Remove button */
+.btn.btn-danger { background-color: #f28b82; color: #202124; }
+.btn.btn-danger:hover { background-color: #ffc1bd; }
+
+/* Secondary button */
+.btn.btn-secondary { background-color: transparent; border: 1px solid #5f6368; color: #e8eaed; }
+.btn.btn-secondary:hover { background-color: #3c4043; }
+
+/* Inputs */
+.whitelist-heading { font-size: 14px; margin-bottom: 10px; font-weight: 500; }
+input[type="text"] {
+  width: 100%; padding: 10px; margin-bottom: 10px;
+  background-color: #3c4043; color: #e8eaed; border: 1px solid #5f6368;
+  border-radius: 6px; box-sizing: border-box; outline: none;
+}
+input[type="text"]:focus { border-color: #8ab4f8; }
+
+/* Whitelist */
+#whitelist-items { margin-top: 15px; max-height: 150px; overflow-y: auto; font-size: 13px; list-style: none; padding: 0; scrollbar-width: thin; scrollbar-color: #5f6368 #292a2d; }
+#whitelist-items::-webkit-scrollbar { width: 6px; }
+#whitelist-items::-webkit-scrollbar-track { background: #292a2d; }
+#whitelist-items::-webkit-scrollbar-thumb { background-color: #5f6368; border-radius: 3px; }
+
+.whitelist-item { display: flex; justify-content: space-between; align-items: center; background: #3c4043; padding: 8px 10px; margin-bottom: 6px; border-radius: 6px; }
+.remove-btn { color: #f28b82; cursor: pointer; font-size: 14px; font-weight: bold; padding: 2px 6px; }
+.remove-btn:hover { color: #ffc1bd; }
+
+/* Current tag */
+.current-tag { font-size: 10px; background-color: #8ab4f8; color: #202124; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; font-weight: bold; }
